@@ -21,8 +21,8 @@ public class ProduceController {
         rocketMQTemplate.convertAndSend("test-topic",msg);
     }
 
-    @GetMapping(value = "/sendTransaction")
-    public void sendTransaction(Long userId,Long goodsId){
+    @GetMapping(value = "/sendTransaction/{userId}/{goodsId}")
+    public void sendTransaction(@PathVariable Long userId, @PathVariable Long goodsId){
         cartInfoService.saveCartInfo(userId,goodsId);
     }
 }

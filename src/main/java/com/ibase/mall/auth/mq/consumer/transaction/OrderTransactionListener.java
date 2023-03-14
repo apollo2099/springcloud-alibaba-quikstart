@@ -3,7 +3,7 @@ package com.ibase.mall.auth.mq.consumer.transaction;
 import com.alibaba.fastjson.JSON;
 import com.ibase.mall.auth.entity.CartInfoEntity;
 import com.ibase.mall.auth.service.CartInfoService;
-import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 /**
  * @author apollo
  */
-@RocketMQMessageListener(consumerGroup = "test-group", topic = "update-account-score")
+@RocketMQTransactionListener
 public class OrderTransactionListener implements RocketMQLocalTransactionListener {
 
     @Resource

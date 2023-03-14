@@ -1,10 +1,13 @@
 package com.ibase.mall.auth.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 
 /**
  * Created by huixiong on 2018/1/4.
  */
+@TableName("js_cart_info")
 public class CartInfoEntity implements Serializable {
     private Integer id;
     private Long userId;
