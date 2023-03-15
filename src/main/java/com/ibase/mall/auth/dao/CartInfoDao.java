@@ -13,4 +13,6 @@ import java.util.Map;
 public interface CartInfoDao extends BaseMapper<CartInfoEntity> {
 
     CartInfoEntity getCartInfoByUserId(Map param);
+
+    CartInfoEntity getCartInfoByTraceId(Map param);
 }

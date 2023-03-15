@@ -36,21 +36,33 @@ public class CartInfoService {
         return cartInfoDao.getCartInfoByUserId(param);
     }
 
+    public CartInfoEntity getCartInfoByTraceId(String traceId){
+        // 获取分表名称
+        String tableName ="js_cart_info";
+        // 暂时先屏蔽分表功能
+        // tableName = TableModelHelper.getCartInfoTableName(String.valueOf(userId), tableName);
+        // 组装参数
+        Map<String,Object> param = new HashMap(2);
+        param.put("traceId",traceId);
+        param.put("tableName",tableName);
+        return cartInfoDao.getCartInfoByTraceId(param);
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public Boolean saveCartInfo(Long userId,Long goodsId){
+        String transactionId = UUID.randomUUID().toString();
         CartInfoEntity cartInfoEntity = new CartInfoEntity();
-        cartInfoEntity.setTradeId(UUID.randomUUID().toString());
+        cartInfoEntity.setTradeId(transactionId);
         cartInfoEntity.setGoodsId(goodsId);
         cartInfoEntity.setUserId(userId);
         cartInfoDao.insert(cartInfoEntity);
 
 
         // 事务id
-        String transactionId = UUID.randomUUID().toString();
         rocketMQTemplate.sendMessageInTransaction("update-account-score",
                 MessageBuilder.withPayload(cartInfoEntity)
                         .setHeader(RocketMQHeaders.TRANSACTION_ID, transactionId)
-                        .setHeader("share_id", 3).build(),
+                        .setHeader("goods_id", goodsId).build(),
                 4L
         );
         System.out.println(" prepare 消息发送成功");

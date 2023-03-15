@@ -7,10 +7,23 @@
 		select
 		id,
 		user_id userId,
-		goods_id goodsId
+		goods_id goodsId,
+		trade_id tradeId
 		from ${tableName}
 		where
 		user_id = #{userId}
+		limit 1
+	</select>
+
+	<select id="getCartInfoByTraceId" resultType="com.ibase.mall.auth.entity.CartInfoEntity" parameterType="java.util.Map">
+		select
+		id,
+		user_id userId,
+		goods_id goodsId,
+		trade_id tradeId
+		from ${tableName}
+		where
+		trade_id = #{tradeId}
 		limit 1
 	</select>
 
