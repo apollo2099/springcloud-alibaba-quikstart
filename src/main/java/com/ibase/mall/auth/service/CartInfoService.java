@@ -1,4 +1,7 @@
 package com.ibase.mall.auth.service;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ibase.mall.auth.dao.CartInfoDao;
 import com.ibase.mall.auth.entity.CartInfoEntity;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -70,5 +73,13 @@ public class CartInfoService {
         // 这里消息发送只是prepare发送，
         // 后面消息队列中prepare成功后，在TestTransactionListener中的executeLocalTransaction的方法中决定是否要提交本地事务
         return true;
+    }
+
+    public IPage<CartInfoEntity> pageList(Long userId) {
+        Page<CartInfoEntity> page = new Page<>(1, 1);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("user_id", userId);
+        IPage<CartInfoEntity> iPage = cartInfoDao.selectPage(page, queryWrapper);
+        return iPage;
     }
 }
