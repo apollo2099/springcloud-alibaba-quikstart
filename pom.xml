@@ -80,12 +80,28 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>HdrHistogram</artifactId>
+                    <groupId>org.hdrhistogram</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- SpringBoot Seata -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>druid</artifactId>
+                    <groupId>com.alibaba</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>error_prone_annotations</artifactId>
+                    <groupId>com.google.errorprone</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--rocketmq bus
@@ -118,6 +134,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>asm</artifactId>
+                    <groupId>org.ow2.asm</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--Rocketmq -->
@@ -125,6 +147,16 @@
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-spring-boot-starter</artifactId>
             <version>${rocketmq-spring-boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-collections</artifactId>
+                    <groupId>commons-collections</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--Dubbo -->
@@ -133,12 +165,6 @@
             <artifactId>spring-cloud-starter-dubbo</artifactId>
             <version>2.2.7.RELEASE</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.spring</groupId>-->
-<!--            <artifactId>spring-context-support</artifactId>-->
-<!--            <version>1.0.11</version>-->
-<!--        </dependency>-->
 
         <!--mybatis-plus start-->
         <dependency>
@@ -207,7 +233,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.1.13.RELEASE</version>
                 <configuration>
-                    <mainClass>com.ibase.mall.auth.AuthApplication</mainClass>
+                    <mainClass>com.ibase.mall.auth.Application</mainClass>
                 </configuration>
                 <executions>
                     <execution>

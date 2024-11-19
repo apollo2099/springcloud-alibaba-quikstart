@@ -12,8 +12,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @MapperScan("com.ibase.mall.auth.dao")
 @EnableFeignClients
 @EnableDubbo
-public class AuthApplication {
+public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(AuthApplication.class,args);
+        SpringApplication.run(Application.class,args);
     }
 }
